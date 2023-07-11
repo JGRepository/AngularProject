@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../recipe.model';
+import { Component, OnInit,EventEmitter, Output } from '@angular/core';
+import { Recipe } from '../../shared/recipe.model';
 
 @Component({
   selector: 'app-recipes-list',
@@ -7,8 +7,13 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipes-list.component.scss']
 })
 export class RecipesListComponent {
-  recipes: Recipe[] = [
-    new Recipe('Test', 'desc', 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/ba/29/5c/img-worlds-of-adventure.jpg?w=1200&h=-1&s=1')
-  ]
+ @Output() recipeWasSelected = new EventEmitter<Recipe>();
 
+  recipes: Recipe[] = [
+    new Recipe('Test', 'desc', 'https://img.freepik.com/premium-vector/cooking-logo-design_636083-140.jpg?w=2000'),
+    new Recipe('Test', 'desc', 'https://img.freepik.com/premium-vector/cooking-logo-design_636083-140.jpg?w=2000')
+  ]
+  onRecipeSelected(recipe: Recipe){
+    this.recipeWasSelected.emit(recipe);
+  }
 }
